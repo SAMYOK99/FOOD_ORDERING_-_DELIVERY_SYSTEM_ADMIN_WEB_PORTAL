@@ -46,7 +46,24 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("This is home screen"),
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(10),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.withOpacity(0.5),
+                spreadRadius: 3,
+                blurRadius: 10,
+                offset: const Offset(0,3),
+              )
+            ],
+          ),
+        ),
+        title: Center(child: Text("ADMIN WEB PORTAL",style: TextStyle(
+          fontWeight: FontWeight.bold,
+          fontSize: 20,
+        ),)),
       ),
       body: Padding(
         padding: const EdgeInsets.all(15.0),
