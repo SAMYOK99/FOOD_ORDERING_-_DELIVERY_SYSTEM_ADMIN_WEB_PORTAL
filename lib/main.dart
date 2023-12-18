@@ -4,7 +4,14 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
 Future<void> main() async {
-  await Firebase.initializeApp();
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: const FirebaseOptions(
+        apiKey: "AIzaSyC8shK6qRmHUweLagNjJMtvgCVjLtr4O5Y",
+        projectId: "my-tiffin-app-8266e",
+        messagingSenderId: "300061634717",
+        appId: "1:300061634717:web:2d6a481afc586c8195e474",
+        ));
   runApp(const MyApp());
 }
 
