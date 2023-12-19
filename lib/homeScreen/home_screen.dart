@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:admin_web_portal/authencation/login.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -377,7 +379,8 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
                     ),
                   ),
                   onPressed: () {
-                    // Add your onPressed logic here
+                    FirebaseAuth.instance.signOut();
+                    Navigator.push(context, MaterialPageRoute(builder: (c) => const LoginScreen()));
                   },
                   style: ElevatedButton.styleFrom(
                     padding: const EdgeInsets.all(30.0),

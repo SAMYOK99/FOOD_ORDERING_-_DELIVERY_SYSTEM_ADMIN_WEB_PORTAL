@@ -1,5 +1,6 @@
 import 'package:admin_web_portal/authencation/login.dart';
 import 'package:admin_web_portal/homeScreen/home_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
@@ -29,7 +30,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       debugShowCheckedModeBanner: false,
-      home: const LoginScreen(),
+      home: FirebaseAuth.instance.currentUser == null ? const LoginScreen() : const AdminHomeScreen(),
     );
   }
 }
