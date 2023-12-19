@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:admin_web_portal/authencation/login.dart';
+import 'package:admin_web_portal/user/verified_users.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -66,6 +67,7 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
           fontWeight: FontWeight.bold,
           fontSize: 20,
         ),)),
+        automaticallyImplyLeading: false,
       ),
       body: Column(
         children: [
@@ -113,7 +115,7 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
                 child: ElevatedButton.icon(
                   icon: const Icon(Icons.block, color: Colors.black),
                   label: Text(
-                    "Block User".toUpperCase(),
+                    "Verified Users".toUpperCase(),
                     style: const TextStyle(
                       color: Colors.black,
                       fontSize: 16,
@@ -121,7 +123,7 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
                     ),
                   ),
                   onPressed: () {
-                    // Add your onPressed logic here
+                    Navigator.push(context, MaterialPageRoute(builder: (c)=> const VerifiedUsers()));
                   },
                   style: ElevatedButton.styleFrom(
                     padding: const EdgeInsets.all(30.0),
@@ -147,7 +149,7 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
                 child: ElevatedButton.icon(
                   icon: const Icon(Icons.person_add, color: Colors.black),
                   label: Text(
-                    "Unblock User".toUpperCase(),
+                    "Blocked Users".toUpperCase(),
                     style: const TextStyle(
                       color: Colors.black,
                       fontSize: 16,
@@ -188,7 +190,7 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
                 child: ElevatedButton.icon(
                   icon: const Icon(Icons.block, color: Colors.black),
                   label: Text(
-                    "Block Staff".toUpperCase(),
+                    "Verified Staffs".toUpperCase(),
                     style: const TextStyle(
                       color: Colors.black,
                       fontSize: 16,
@@ -222,7 +224,7 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
                 child: ElevatedButton.icon(
                   icon: const Icon(Icons.person_add, color: Colors.black),
                   label: Text(
-                    "Unblock Staff".toUpperCase(),
+                    "Blocked Staffs".toUpperCase(),
                     style: const TextStyle(
                       color: Colors.black,
                       fontSize: 16,
@@ -263,7 +265,7 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
                 child: ElevatedButton.icon(
                   icon: const Icon(Icons.block, color: Colors.black),
                   label: Text(
-                    "Block Rider".toUpperCase(),
+                    "Verified Riders".toUpperCase(),
                     style: const TextStyle(
                       color: Colors.black,
                       fontSize: 16,
@@ -297,7 +299,7 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
                 child: ElevatedButton.icon(
                   icon: const Icon(Icons.person_add, color: Colors.black),
                   label: Text(
-                    "Unblock Rider".toUpperCase(),
+                    "Blocked Rider".toUpperCase(),
                     style: const TextStyle(
                       color: Colors.black,
                       fontSize: 16,
