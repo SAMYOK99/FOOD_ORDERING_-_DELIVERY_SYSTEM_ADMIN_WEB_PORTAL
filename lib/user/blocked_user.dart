@@ -3,23 +3,23 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
-class VerifiedUsers extends StatefulWidget {
-  const VerifiedUsers({super.key});
+class BlockedUsers extends StatefulWidget {
+  const BlockedUsers({super.key});
 
   @override
-  State<VerifiedUsers> createState() => _VerifiedUsersState();
+  State<BlockedUsers> createState() => _BlockedUsersState();
 }
 
-class _VerifiedUsersState extends State<VerifiedUsers> {
+class _BlockedUsersState extends State<BlockedUsers> {
   QuerySnapshot? allUsers;
 
-  dialogBoxForBlockingUserAccount(userDocId) {
+  dialogBoxForUnBlockingUserAccount(userDocId) {
     return showDialog(
         context: context,
         builder: (BuildContext context){
           return AlertDialog(
             title: const Text(
-              "Block Account",
+              "UnBlock Account",
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 25,
@@ -37,25 +37,25 @@ class _VerifiedUsersState extends State<VerifiedUsers> {
             actions: [
               ElevatedButton(
                   onPressed: (){
-                Navigator.pop(context);
-              },
+                    Navigator.pop(context);
+                  },
                   child: const Text("No")),
               ElevatedButton(
                   onPressed: (){
                     Map<String, dynamic> userDataMap = {
-                      "status": "blocked"
+                      "status": "approved"
                     };
-                    FirebaseFirestore.instance.collection("users")
+                    FirebaseFirestore.instance.collection("riders")
                         .doc(userDocId)
                         .update(userDataMap)
                         .then((value) {
-                          Navigator.push(context, MaterialPageRoute(builder: (c)=>const AdminHomeScreen()));
+                      Navigator.push(context, MaterialPageRoute(builder: (c)=>const AdminHomeScreen()));
                       SnackBar snackBar = const SnackBar(content: Center(
                         child: Text(
-                          "User has been Blocked.",
+                          "User has been Unblocked.",
                           style:  TextStyle(
                             fontSize: 25,
-                            color: Colors.red,
+                            color: Colors.green,
                           ),
                         ),
                       ),
@@ -77,13 +77,13 @@ class _VerifiedUsersState extends State<VerifiedUsers> {
   void initState() {
     super.initState();
     FirebaseFirestore.instance.collection("users")
-        .where("status", isEqualTo: "approved")
+        .where("status", isEqualTo: "blocked")
         .where("role", isEqualTo: "user")
         .get().then((verifiedUsers) {
-          setState(() {
-            allUsers = verifiedUsers;
+      setState(() {
+        allUsers = verifiedUsers;
 
-          });
+      });
 
     });
   }
@@ -158,14 +158,14 @@ class _VerifiedUsersState extends State<VerifiedUsers> {
                         ),
                         ElevatedButton.icon(onPressed: ()
                         {
-                        dialogBoxForBlockingUserAccount(allUsers!.docs[i].id);
+                          dialogBoxForUnBlockingUserAccount(allUsers!.docs[i].id);
 
                         },
                           icon: const Icon(
                             Icons.person_off_rounded,
-                            color: Colors.red,
+                            color: Colors.green,
                           ),
-                          label: Text("Block this account".toUpperCase(),
+                          label: Text("UnBlock this account".toUpperCase(),
                             style: const TextStyle(
                                 color: Colors.black
                             ),),
@@ -214,11 +214,11 @@ class _VerifiedUsersState extends State<VerifiedUsers> {
         ),
         centerTitle: true,
         title: const Text(
-          "VERIFIED USERS",
+          "BLOCKED USERS",
           style: TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 20,
-            letterSpacing: 3
+              fontWeight: FontWeight.bold,
+              fontSize: 20,
+              letterSpacing: 3
           ),
         ),
         leading: IconButton(

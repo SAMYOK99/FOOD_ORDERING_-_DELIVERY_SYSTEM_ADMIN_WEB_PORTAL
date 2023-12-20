@@ -3,23 +3,23 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
-class VerifiedUsers extends StatefulWidget {
-  const VerifiedUsers({super.key});
+class BlockedRiders extends StatefulWidget {
+  const BlockedRiders({super.key});
 
   @override
-  State<VerifiedUsers> createState() => _VerifiedUsersState();
+  State<BlockedRiders> createState() => _BlockedRidersState();
 }
 
-class _VerifiedUsersState extends State<VerifiedUsers> {
-  QuerySnapshot? allUsers;
+class _BlockedRidersState extends State<BlockedRiders> {
+  QuerySnapshot? allRiders;
 
-  dialogBoxForBlockingUserAccount(userDocId) {
+  dialogBoxForUnBlockingUserAccount(userDocId) {
     return showDialog(
         context: context,
         builder: (BuildContext context){
           return AlertDialog(
             title: const Text(
-              "Block Account",
+              "UnBlock Account",
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 25,
@@ -34,28 +34,29 @@ class _VerifiedUsersState extends State<VerifiedUsers> {
                 letterSpacing: 2,
               ),
             ),
+
             actions: [
               ElevatedButton(
                   onPressed: (){
-                Navigator.pop(context);
-              },
+                    Navigator.pop(context);
+                  },
                   child: const Text("No")),
               ElevatedButton(
                   onPressed: (){
                     Map<String, dynamic> userDataMap = {
-                      "status": "blocked"
+                      "status": "approved"
                     };
-                    FirebaseFirestore.instance.collection("users")
+                    FirebaseFirestore.instance.collection("riders")
                         .doc(userDocId)
                         .update(userDataMap)
                         .then((value) {
-                          Navigator.push(context, MaterialPageRoute(builder: (c)=>const AdminHomeScreen()));
+                      Navigator.push(context, MaterialPageRoute(builder: (c)=>const AdminHomeScreen()));
                       SnackBar snackBar = const SnackBar(content: Center(
                         child: Text(
-                          "User has been Blocked.",
+                          "Rider has been Unblocked.",
                           style:  TextStyle(
                             fontSize: 25,
-                            color: Colors.red,
+                            color: Colors.green,
                           ),
                         ),
                       ),
@@ -76,23 +77,23 @@ class _VerifiedUsersState extends State<VerifiedUsers> {
   @override
   void initState() {
     super.initState();
-    FirebaseFirestore.instance.collection("users")
-        .where("status", isEqualTo: "approved")
-        .where("role", isEqualTo: "user")
+    FirebaseFirestore.instance.collection("riders")
+        .where("status", isEqualTo: "blocked")
+        .where("role", isEqualTo: "rider")
         .get().then((verifiedUsers) {
-          setState(() {
-            allUsers = verifiedUsers;
+      setState(() {
+        allRiders = verifiedUsers;
 
-          });
+      });
 
     });
   }
   @override
   Widget build(BuildContext context) {
     Widget displayVerifiedUsers(){
-      if (allUsers != null && allUsers!.docs.isNotEmpty) {
+      if (allRiders != null && allRiders!.docs.isNotEmpty) {
         return ListView.builder(
-          itemCount: allUsers!.docs.length,
+          itemCount: allRiders!.docs.length,
           itemBuilder: (context, i){
             return  Card(
                 margin: const EdgeInsets.all(15.0),
@@ -116,7 +117,7 @@ class _VerifiedUsersState extends State<VerifiedUsers> {
                       children: [
                         ListTile(
                           leading:CachedNetworkImage(
-                            imageUrl: allUsers!.docs[i].get("userImageUrl"),
+                            imageUrl: allRiders!.docs[i].get("riderAvatarUrl"),
                             placeholder: (context, url) => const CircularProgressIndicator(), // Placeholder while the image loads
                             errorWidget: (context, url, error) => const Icon(Icons.person,
                               size: 30,), // Widget displayed on error
@@ -139,7 +140,7 @@ class _VerifiedUsersState extends State<VerifiedUsers> {
                           // ),
                           // ),
                           title: Text(
-                            allUsers!.docs[i].get("userName"),
+                            allRiders!.docs[i].get("riderName"),
                           ),
                           trailing: Row(
                             mainAxisSize: MainAxisSize.min,
@@ -147,7 +148,7 @@ class _VerifiedUsersState extends State<VerifiedUsers> {
                               const Icon(Icons.email),
                               const SizedBox(width: 10,),
                               Text(
-                                allUsers!.docs[i].get("userEmail"),
+                                allRiders!.docs[i].get("riderEmail"),
                                 style: const TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.bold,
@@ -158,14 +159,14 @@ class _VerifiedUsersState extends State<VerifiedUsers> {
                         ),
                         ElevatedButton.icon(onPressed: ()
                         {
-                        dialogBoxForBlockingUserAccount(allUsers!.docs[i].id);
+                          dialogBoxForUnBlockingUserAccount(allRiders!.docs[i].id);
 
                         },
                           icon: const Icon(
                             Icons.person_off_rounded,
-                            color: Colors.red,
+                            color: Colors.green,
                           ),
-                          label: Text("Block this account".toUpperCase(),
+                          label: Text("UnBlock this account".toUpperCase(),
                             style: const TextStyle(
                                 color: Colors.black
                             ),),
@@ -181,7 +182,7 @@ class _VerifiedUsersState extends State<VerifiedUsers> {
           },
 
         );
-      } else if (allUsers != null && allUsers!.docs.isEmpty) {
+      } else if (allRiders != null && allRiders!.docs.isEmpty) {
         return const Center(
           child: Text(
             "No user found.",
@@ -214,11 +215,11 @@ class _VerifiedUsersState extends State<VerifiedUsers> {
         ),
         centerTitle: true,
         title: const Text(
-          "VERIFIED USERS",
+          "BLOCKED RIDERS",
           style: TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 20,
-            letterSpacing: 3
+              fontWeight: FontWeight.bold,
+              fontSize: 20,
+              letterSpacing: 3
           ),
         ),
         leading: IconButton(

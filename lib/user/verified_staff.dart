@@ -3,15 +3,15 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
-class VerifiedUsers extends StatefulWidget {
-  const VerifiedUsers({super.key});
+class VerifiedStaffs extends StatefulWidget {
+  const VerifiedStaffs({super.key});
 
   @override
-  State<VerifiedUsers> createState() => _VerifiedUsersState();
+  State<VerifiedStaffs> createState() => _VerifiedStaffsState();
 }
 
-class _VerifiedUsersState extends State<VerifiedUsers> {
-  QuerySnapshot? allUsers;
+class _VerifiedStaffsState extends State<VerifiedStaffs> {
+  QuerySnapshot? allStaffs;
 
   dialogBoxForBlockingUserAccount(userDocId) {
     return showDialog(
@@ -37,8 +37,8 @@ class _VerifiedUsersState extends State<VerifiedUsers> {
             actions: [
               ElevatedButton(
                   onPressed: (){
-                Navigator.pop(context);
-              },
+                    Navigator.pop(context);
+                  },
                   child: const Text("No")),
               ElevatedButton(
                   onPressed: (){
@@ -49,10 +49,10 @@ class _VerifiedUsersState extends State<VerifiedUsers> {
                         .doc(userDocId)
                         .update(userDataMap)
                         .then((value) {
-                          Navigator.push(context, MaterialPageRoute(builder: (c)=>const AdminHomeScreen()));
+                      Navigator.push(context, MaterialPageRoute(builder: (c)=>const AdminHomeScreen()));
                       SnackBar snackBar = const SnackBar(content: Center(
                         child: Text(
-                          "User has been Blocked.",
+                          "Staff has been Blocked.",
                           style:  TextStyle(
                             fontSize: 25,
                             color: Colors.red,
@@ -78,21 +78,21 @@ class _VerifiedUsersState extends State<VerifiedUsers> {
     super.initState();
     FirebaseFirestore.instance.collection("users")
         .where("status", isEqualTo: "approved")
-        .where("role", isEqualTo: "user")
+        .where("role", isEqualTo: "staff")
         .get().then((verifiedUsers) {
-          setState(() {
-            allUsers = verifiedUsers;
+      setState(() {
+        allStaffs = verifiedUsers;
 
-          });
+      });
 
     });
   }
   @override
   Widget build(BuildContext context) {
     Widget displayVerifiedUsers(){
-      if (allUsers != null && allUsers!.docs.isNotEmpty) {
+      if (allStaffs != null && allStaffs!.docs.isNotEmpty) {
         return ListView.builder(
-          itemCount: allUsers!.docs.length,
+          itemCount: allStaffs!.docs.length,
           itemBuilder: (context, i){
             return  Card(
                 margin: const EdgeInsets.all(15.0),
@@ -116,7 +116,7 @@ class _VerifiedUsersState extends State<VerifiedUsers> {
                       children: [
                         ListTile(
                           leading:CachedNetworkImage(
-                            imageUrl: allUsers!.docs[i].get("userImageUrl"),
+                            imageUrl: allStaffs!.docs[i].get("userImageUrl"),
                             placeholder: (context, url) => const CircularProgressIndicator(), // Placeholder while the image loads
                             errorWidget: (context, url, error) => const Icon(Icons.person,
                               size: 30,), // Widget displayed on error
@@ -139,7 +139,7 @@ class _VerifiedUsersState extends State<VerifiedUsers> {
                           // ),
                           // ),
                           title: Text(
-                            allUsers!.docs[i].get("userName"),
+                            allStaffs!.docs[i].get("userName"),
                           ),
                           trailing: Row(
                             mainAxisSize: MainAxisSize.min,
@@ -147,7 +147,7 @@ class _VerifiedUsersState extends State<VerifiedUsers> {
                               const Icon(Icons.email),
                               const SizedBox(width: 10,),
                               Text(
-                                allUsers!.docs[i].get("userEmail"),
+                                allStaffs!.docs[i].get("userEmail"),
                                 style: const TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.bold,
@@ -158,7 +158,7 @@ class _VerifiedUsersState extends State<VerifiedUsers> {
                         ),
                         ElevatedButton.icon(onPressed: ()
                         {
-                        dialogBoxForBlockingUserAccount(allUsers!.docs[i].id);
+                          dialogBoxForBlockingUserAccount(allStaffs!.docs[i].id);
 
                         },
                           icon: const Icon(
@@ -181,7 +181,7 @@ class _VerifiedUsersState extends State<VerifiedUsers> {
           },
 
         );
-      } else if (allUsers != null && allUsers!.docs.isEmpty) {
+      } else if (allStaffs != null && allStaffs!.docs.isEmpty) {
         return const Center(
           child: Text(
             "No user found.",
@@ -214,11 +214,11 @@ class _VerifiedUsersState extends State<VerifiedUsers> {
         ),
         centerTitle: true,
         title: const Text(
-          "VERIFIED USERS",
+          "VERIFIED STAFFS",
           style: TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 20,
-            letterSpacing: 3
+              fontWeight: FontWeight.bold,
+              fontSize: 20,
+              letterSpacing: 3
           ),
         ),
         leading: IconButton(

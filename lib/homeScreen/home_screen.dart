@@ -1,6 +1,10 @@
 import 'dart:async';
-
 import 'package:admin_web_portal/authencation/login.dart';
+import 'package:admin_web_portal/user/blocked_riders.dart';
+import 'package:admin_web_portal/user/blocked_staff.dart';
+import 'package:admin_web_portal/user/blocked_user.dart';
+import 'package:admin_web_portal/user/verified_riders.dart';
+import 'package:admin_web_portal/user/verified_staff.dart';
 import 'package:admin_web_portal/user/verified_users.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -158,7 +162,7 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
                     ),
                   ),
                   onPressed: () {
-                    // Add your onPressed logic here
+                    Navigator.push(context, MaterialPageRoute(builder: (c)=> const BlockedUsers()));
                   },
                   style: ElevatedButton.styleFrom(
                     padding: const EdgeInsets.all(30.0),
@@ -199,7 +203,8 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
                     ),
                   ),
                   onPressed: () {
-                    // Add your onPressed logic here
+                    Navigator.push(context, MaterialPageRoute(builder: (c)=> const VerifiedStaffs()));
+
                   },
                   style: ElevatedButton.styleFrom(
                     padding: const EdgeInsets.all(30.0),
@@ -233,7 +238,8 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
                     ),
                   ),
                   onPressed: () {
-                    // Add your onPressed logic here
+                    Navigator.push(context, MaterialPageRoute(builder: (c)=> const BlockedStaffs()));
+
                   },
                   style: ElevatedButton.styleFrom(
                     padding: const EdgeInsets.all(30.0),
@@ -274,7 +280,7 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
                     ),
                   ),
                   onPressed: () {
-                    // Add your onPressed logic here
+                    Navigator.push(context, MaterialPageRoute(builder: (c)=> const VerifiedRiders()));
                   },
                   style: ElevatedButton.styleFrom(
                     padding: const EdgeInsets.all(30.0),
@@ -308,7 +314,7 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
                     ),
                   ),
                   onPressed: () {
-                    // Add your onPressed logic here
+                    Navigator.push(context, MaterialPageRoute(builder: (c)=> const BlockedRiders()));
                   },
                   style: ElevatedButton.styleFrom(
                     padding: const EdgeInsets.all(30.0),
