@@ -66,6 +66,7 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
         title:  const Center(child: Text("ADMIN WEB PORTAL",style: TextStyle(
           fontWeight: FontWeight.bold,
           fontSize: 20,
+          letterSpacing: 3,
         ),)),
         automaticallyImplyLeading: false,
       ),
