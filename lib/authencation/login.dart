@@ -44,7 +44,7 @@ color: Colors.red,
       ),
     ),
       backgroundColor: Colors.white,
-      duration: Duration(seconds: 5) ,);
+      duration: Duration(seconds: 4) ,);
     ScaffoldMessenger.of(context).showSnackBar(snackBar);
     User? currentAdmin;
     await FirebaseAuth.instance.signInWithEmailAndPassword(
@@ -63,7 +63,7 @@ color: Colors.red,
         ),
       ),
         backgroundColor: Colors.white,
-        duration: const Duration(seconds: 5) ,);
+        duration: const Duration(seconds: 4) ,);
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
     });
     if(currentAdmin!= null){
@@ -83,7 +83,7 @@ color: Colors.red,
             ),
           ),
             backgroundColor: Colors.white,
-            duration: Duration(seconds: 5) ,);
+            duration: Duration(seconds: 4) ,);
           ScaffoldMessenger.of(context).showSnackBar(snackBar);
         }
       });

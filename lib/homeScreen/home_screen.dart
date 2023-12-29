@@ -6,6 +6,7 @@ import 'package:admin_web_portal/user/blocked_user.dart';
 import 'package:admin_web_portal/user/verified_riders.dart';
 import 'package:admin_web_portal/user/verified_staff.dart';
 import 'package:admin_web_portal/user/verified_users.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -20,6 +21,8 @@ class AdminHomeScreen extends StatefulWidget {
 class _AdminHomeScreenState extends State<AdminHomeScreen> {
   String timeString = "";
   String dateString = "";
+  double totalEarning = 0.0;
+
   String formatCurrentTime(DateTime time){
     return DateFormat("hh:mm:ss a").format(time);
   }
@@ -38,6 +41,22 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
       });
     }
   }
+  retrieveTotalEarning() async
+  {
+    QuerySnapshot querySnapshot = await FirebaseFirestore.instance.collection("orders").get();
+    double tempTotalEarning = 0.0;
+    for (var doc in querySnapshot.docs) {
+      if(doc.exists){
+        var data = doc.data() as Map<String, dynamic>?;
+        if (data != null && data['totalAmount'] != null) {
+          double orderAmount = data['totalAmount'];
+          tempTotalEarning += orderAmount;
+        }      }
+    }
+    setState(() {
+      totalEarning = tempTotalEarning;
+    });
+  }
   @override
   void initState() {
     super.initState();
@@ -48,6 +67,8 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
     Timer.periodic(const Duration(seconds: 1), (timer) {
       getCurrentTime();
     });
+    retrieveTotalEarning();
+
   }
   @override
   Widget build(BuildContext context) {
@@ -89,6 +110,26 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
                     letterSpacing: 3
                   ),
                 ),
+                Row(
+                  children: [
+                    const Text(
+                      "Total Earnings: ",style: TextStyle(
+                      color: Colors.green,
+                      letterSpacing: 2,
+                      fontSize: 20,
+
+                    ),
+                    ),
+                    Text(
+                      "\$ $totalEarning",
+                      style: const TextStyle(
+                        fontSize: 25,
+                      ),
+                    ),
+
+                  ],
+                ),
+
                 Text(
                   dateString,
                   style: const TextStyle(
@@ -330,38 +371,77 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Container(
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(10.0),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey.withOpacity(0.5),
-                      spreadRadius: 3,
-                      blurRadius: 10,
-                      offset: const Offset(0,3),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(10.0),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.5),
+                          spreadRadius: 3,
+                          blurRadius: 10,
+                          offset: const Offset(0,3),
+                        ),
+                      ],
                     ),
-                  ],
-                ),
-                child: ElevatedButton.icon(
-                  icon: const Icon(Icons.person_add, color: Colors.black),
-                  label: Text(
-                    "Add New Staff".toUpperCase(),
-                    style: const TextStyle(
-                      color: Colors.black,
-                      fontSize: 16,
-                      letterSpacing: 3,
-                    ),
-                  ),
-                  onPressed: () {
-                    // Add your onPressed logic here
-                  },
-                  style: ElevatedButton.styleFrom(
-                    padding: const EdgeInsets.all(30.0),
+                    child: ElevatedButton.icon(
+                      icon: const Icon(Icons.person_add, color: Colors.black),
+                      label: Text(
+                        "Add New Staff".toUpperCase(),
+                        style: const TextStyle(
+                          color: Colors.black,
+                          fontSize: 16,
+                          letterSpacing: 3,
+                        ),
+                      ),
+                      onPressed: () {
+                        // Add your onPressed logic here
+                      },
+                      style: ElevatedButton.styleFrom(
+                        padding: const EdgeInsets.all(30.0),
 
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
+                      ),
+                    ),
                   ),
-                ),
+                  const SizedBox(width: 20.0,),
+                  Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(10.0),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.5),
+                          spreadRadius: 3,
+                          blurRadius: 10,
+                          offset: const Offset(0,3),
+                        ),
+                      ],
+                    ),
+                    child: ElevatedButton.icon(
+                      icon: const Icon(Icons.price_change_outlined, color: Colors.black),
+                      label: Text(
+                        "\$ per ride".toUpperCase(),
+                        style: const TextStyle(
+                          color: Colors.black,
+                          fontSize: 16,
+                          letterSpacing: 3,
+                        ),
+                      ),
+                      onPressed: () {
+                        // Add your onPressed logic here
+                      },
+                      style: ElevatedButton.styleFrom(
+                        padding: const EdgeInsets.all(30.0),
+
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
+                      ),
+                    ),
+                  ),
+                ],
               ),
               const SizedBox(height: 20,),
               Container(
