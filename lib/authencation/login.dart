@@ -39,7 +39,7 @@ class _LoginScreenState extends State<LoginScreen> {
         "Authenticating..., Please Wait",
         style:  TextStyle(
           fontSize: 25,
-color: Colors.red,
+          color: Colors.red,
         ),
       ),
     ),
@@ -58,7 +58,7 @@ color: Colors.red,
           "Something Went Wrong  $onError",
           style: const TextStyle(
             fontSize: 25,
-color: Colors.red,
+            color: Colors.red,
           ),
         ),
       ),

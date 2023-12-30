@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:admin_web_portal/authencation/login.dart';
+import 'package:admin_web_portal/homeScreen/change_earnings.dart';
 import 'package:admin_web_portal/user/blocked_riders.dart';
 import 'package:admin_web_portal/user/blocked_staff.dart';
 import 'package:admin_web_portal/user/blocked_user.dart';
@@ -114,9 +115,9 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
                   children: [
                     const Text(
                       "Total Earnings: ",style: TextStyle(
-                      color: Colors.green,
                       letterSpacing: 2,
                       fontSize: 20,
+                      fontWeight: FontWeight.bold,
 
                     ),
                     ),
@@ -124,6 +125,8 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
                       "\$ $totalEarning",
                       style: const TextStyle(
                         fontSize: 25,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.red,
                       ),
                     ),
 
@@ -432,7 +435,7 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
                         ),
                       ),
                       onPressed: () {
-                        // Add your onPressed logic here
+                        Navigator.push(context, MaterialPageRoute(builder: (c) => const ChangeEarningScreen()));
                       },
                       style: ElevatedButton.styleFrom(
                         padding: const EdgeInsets.all(30.0),
