@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:admin_web_portal/authencation/login.dart';
 import 'package:admin_web_portal/homeScreen/change_earnings.dart';
+import 'package:admin_web_portal/user/add_new_staff.dart';
 import 'package:admin_web_portal/user/blocked_riders.dart';
 import 'package:admin_web_portal/user/blocked_staff.dart';
 import 'package:admin_web_portal/user/blocked_user.dart';
@@ -401,7 +402,7 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
                         ),
                       ),
                       onPressed: () {
-                        // Add your onPressed logic here
+                        Navigator.push(context, MaterialPageRoute(builder: (c) => const AddNewStaffScreen()));
                       },
                       style: ElevatedButton.styleFrom(
                         padding: const EdgeInsets.all(30.0),

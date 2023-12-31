@@ -27,7 +27,7 @@ class _BlockedStaffsState extends State<BlockedStaffs> {
               ),
             ),
             content: const Text(
-              "Do you want to block this Account",
+              "Do you want to unblock this Account",
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 15,

@@ -27,7 +27,7 @@ class _BlockedUsersState extends State<BlockedUsers> {
               ),
             ),
             content: const Text(
-              "Do you want to block this Account",
+              "Do you want to unblock this Account",
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 15,
@@ -45,17 +45,17 @@ class _BlockedUsersState extends State<BlockedUsers> {
                     Map<String, dynamic> userDataMap = {
                       "status": "approved"
                     };
-                    FirebaseFirestore.instance.collection("riders")
+                    FirebaseFirestore.instance.collection("users")
                         .doc(userDocId)
                         .update(userDataMap)
                         .then((value) {
                       Navigator.push(context, MaterialPageRoute(builder: (c)=>const AdminHomeScreen()));
                       SnackBar snackBar = const SnackBar(content: Center(
                         child: Text(
-                          "User has been Unblocked.",
+                          "User has been Blocked.",
                           style:  TextStyle(
                             fontSize: 25,
-                            color: Colors.green,
+                            color: Colors.red,
                           ),
                         ),
                       ),
