@@ -163,7 +163,7 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
                   ],
                 ),
                 child: ElevatedButton.icon(
-                  icon: const Icon(Icons.block, color: Colors.black),
+                  icon: const Icon(Icons.person_add, color: Colors.black),
                   label: Text(
                     "Verified Users".toUpperCase(),
                     style: const TextStyle(
@@ -197,7 +197,7 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
                   ],
                 ),
                 child: ElevatedButton.icon(
-                  icon: const Icon(Icons.person_add, color: Colors.black),
+                  icon: const Icon(Icons.block, color: Colors.black),
                   label: Text(
                     "Blocked Users".toUpperCase(),
                     style: const TextStyle(
@@ -238,7 +238,7 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
                   ],
                 ),
                 child: ElevatedButton.icon(
-                  icon: const Icon(Icons.block, color: Colors.black),
+                  icon: const Icon(Icons.person_add, color: Colors.black),
                   label: Text(
                     "Verified Staffs".toUpperCase(),
                     style: const TextStyle(
@@ -273,7 +273,7 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
                   ],
                 ),
                 child: ElevatedButton.icon(
-                  icon: const Icon(Icons.person_add, color: Colors.black),
+                  icon: const Icon(Icons.block, color: Colors.black),
                   label: Text(
                     "Blocked Staffs".toUpperCase(),
                     style: const TextStyle(
@@ -315,7 +315,7 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
                   ],
                 ),
                 child: ElevatedButton.icon(
-                  icon: const Icon(Icons.block, color: Colors.black),
+                  icon: const Icon(Icons.person_add, color: Colors.black),
                   label: Text(
                     "Verified Riders".toUpperCase(),
                     style: const TextStyle(
@@ -349,7 +349,7 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
                   ],
                 ),
                 child: ElevatedButton.icon(
-                  icon: const Icon(Icons.person_add, color: Colors.black),
+                  icon: const Icon(Icons.block, color: Colors.black),
                   label: Text(
                     "Blocked Rider".toUpperCase(),
                     style: const TextStyle(
@@ -378,40 +378,40 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Container(
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(10.0),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey.withOpacity(0.5),
-                          spreadRadius: 3,
-                          blurRadius: 10,
-                          offset: const Offset(0,3),
-                        ),
-                      ],
-                    ),
-                    child: ElevatedButton.icon(
-                      icon: const Icon(Icons.person_add, color: Colors.black),
-                      label: Text(
-                        "Add New Staff".toUpperCase(),
-                        style: const TextStyle(
-                          color: Colors.black,
-                          fontSize: 16,
-                          letterSpacing: 3,
-                        ),
-                      ),
-                      onPressed: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (c) => const AddNewStaffScreen()));
-                      },
-                      style: ElevatedButton.styleFrom(
-                        padding: const EdgeInsets.all(30.0),
-
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(width: 20.0,),
+                  // Container(
+                  //   decoration: BoxDecoration(
+                  //     color: Colors.white,
+                  //     borderRadius: BorderRadius.circular(10.0),
+                  //     boxShadow: [
+                  //       BoxShadow(
+                  //         color: Colors.grey.withOpacity(0.5),
+                  //         spreadRadius: 3,
+                  //         blurRadius: 10,
+                  //         offset: const Offset(0,3),
+                  //       ),
+                  //     ],
+                  //   ),
+                  //   child: ElevatedButton.icon(
+                  //     icon: const Icon(Icons.person_add, color: Colors.black),
+                  //     label: Text(
+                  //       "Add New Staff".toUpperCase(),
+                  //       style: const TextStyle(
+                  //         color: Colors.black,
+                  //         fontSize: 16,
+                  //         letterSpacing: 3,
+                  //       ),
+                  //     ),
+                  //     onPressed: () {
+                  //       Navigator.push(context, MaterialPageRoute(builder: (c) => const AddNewStaffScreen()));
+                  //     },
+                  //     style: ElevatedButton.styleFrom(
+                  //       padding: const EdgeInsets.all(30.0),
+                  //
+                  //       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
+                  //     ),
+                  //   ),
+                  // ),
+                  // const SizedBox(width: 20.0,),
                   Container(
                     decoration: BoxDecoration(
                       color: Colors.white,
