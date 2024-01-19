@@ -8,6 +8,7 @@ import 'package:admin_web_portal/user/blocked_user.dart';
 import 'package:admin_web_portal/user/verified_riders.dart';
 import 'package:admin_web_portal/user/verified_staff.dart';
 import 'package:admin_web_portal/user/verified_users.dart';
+import 'package:admin_web_portal/widgets/change_role.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -378,40 +379,40 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  // Container(
-                  //   decoration: BoxDecoration(
-                  //     color: Colors.white,
-                  //     borderRadius: BorderRadius.circular(10.0),
-                  //     boxShadow: [
-                  //       BoxShadow(
-                  //         color: Colors.grey.withOpacity(0.5),
-                  //         spreadRadius: 3,
-                  //         blurRadius: 10,
-                  //         offset: const Offset(0,3),
-                  //       ),
-                  //     ],
-                  //   ),
-                  //   child: ElevatedButton.icon(
-                  //     icon: const Icon(Icons.person_add, color: Colors.black),
-                  //     label: Text(
-                  //       "Add New Staff".toUpperCase(),
-                  //       style: const TextStyle(
-                  //         color: Colors.black,
-                  //         fontSize: 16,
-                  //         letterSpacing: 3,
-                  //       ),
-                  //     ),
-                  //     onPressed: () {
-                  //       Navigator.push(context, MaterialPageRoute(builder: (c) => const AddNewStaffScreen()));
-                  //     },
-                  //     style: ElevatedButton.styleFrom(
-                  //       padding: const EdgeInsets.all(30.0),
-                  //
-                  //       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
-                  //     ),
-                  //   ),
-                  // ),
-                  // const SizedBox(width: 20.0,),
+                  Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(10.0),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.5),
+                          spreadRadius: 3,
+                          blurRadius: 10,
+                          offset: const Offset(0,3),
+                        ),
+                      ],
+                    ),
+                    child: ElevatedButton.icon(
+                      icon: const Icon(Icons.person_add, color: Colors.black),
+                      label: Text(
+                        "Change the Role".toUpperCase(),
+                        style: const TextStyle(
+                          color: Colors.black,
+                          fontSize: 16,
+                          letterSpacing: 3,
+                        ),
+                      ),
+                      onPressed: () {
+                        Navigator.push(context, MaterialPageRoute(builder: (c) => const ChangeRoleScreen()));
+                      },
+                      style: ElevatedButton.styleFrom(
+                        padding: const EdgeInsets.all(30.0),
+
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(width: 20.0,),
                   Container(
                     decoration: BoxDecoration(
                       color: Colors.white,
